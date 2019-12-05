@@ -25,7 +25,7 @@ RUN strip -s /usr/local/lib/libgetdns.so.10
 # won't preserve the extended attributes, thus I can't use the nonroot image,
 # and there's no :latest image that I can use.
 # Use :debug build for now.
-FROM gcr.io/distroless/base-debian10:debug
+FROM gcr.io/distroless/base-debian10:latest
 
 COPY --from=build_env /usr/local/lib/libgetdns.so.10 /lib/x86_64-linux-gnu/
 COPY --from=build_env /usr/local/bin/stubby /bin/
