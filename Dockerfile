@@ -5,8 +5,8 @@ ENV GETDNS_VERSION=${SOURCE_BRANCH:-1.6.0}
 ENV STUBBY_URL https://getdnsapi.net/dist/getdns-${GETDNS_VERSION}.tar.gz
 
 RUN apt-get update
-RUN apt-get install -y build-essential curl libexpat-dev libtool-bin automake \
-        libyaml-dev libssl-dev
+RUN apt-get install -y build-essential curl libexpat-dev libtool-bin autoconf \
+        libyaml-dev libssl-dev cmake check make
 
 WORKDIR /tmp/build
 RUN curl -v -O ${STUBBY_URL}
@@ -14,7 +14,7 @@ RUN tar xvf getdns-${GETDNS_VERSION}.tar.gz
 WORKDIR /tmp/build/getdns-${GETDNS_VERSION}
 #RUN ./configure --enable-stub-only --without-libidn --without-libidn2 \
 #        --with-stubby
-RUN cmake -DENABLE_STUB_ONLY=ON -DBUILD_STUBBY=ON -DUSE_LIBIDN2=OFF .
+RUN cmake -DENABLE_STUB_ONLY=ON -DBUILD_STUBBY=ON -DUSE_LIBIDN2=OFF -DBUILD_LIBEV=OFF -DBUILD_LIBEVENT2=OFF -DBUILD_LIBUV=OFF .
 RUN make && make install
 
 RUN strip -s /usr/local/bin/getdns_server_mon
