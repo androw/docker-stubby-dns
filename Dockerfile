@@ -1,6 +1,6 @@
 FROM debian:buster as build_env
 ARG SOURCE_BRANCH
-ENV GETDNS_VERSION=${SOURCE_BRANCH:-1.5.2}
+ENV GETDNS_VERSION=${SOURCE_BRANCH:-1.6.0}
 
 ENV STUBBY_URL https://getdnsapi.net/dist/getdns-${GETDNS_VERSION}.tar.gz
 
