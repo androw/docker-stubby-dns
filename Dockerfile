@@ -12,8 +12,9 @@ WORKDIR /tmp/build
 RUN curl -v -O ${STUBBY_URL}
 RUN tar xvf getdns-${GETDNS_VERSION}.tar.gz
 WORKDIR /tmp/build/getdns-${GETDNS_VERSION}
-RUN ./configure --enable-stub-only --without-libidn --without-libidn2 \
-        --with-stubby
+#RUN ./configure --enable-stub-only --without-libidn --without-libidn2 \
+#        --with-stubby
+RUN cmake -DENABLE_STUB_ONLY=ON -DBUILD_STUBBY=ON -DUSE_LIBIDN2=OFF .
 RUN make && make install
 
 RUN strip -s /usr/local/bin/getdns_server_mon
